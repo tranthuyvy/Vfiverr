@@ -1,8 +1,8 @@
 import express from "express";
+import { fn } from "../controllers/conversation.controller.js";
 
 const router = express.Router();
 
-router.get("/register");
-router.get("/login");
+router.get("/test", fn);
 
 export default router;
