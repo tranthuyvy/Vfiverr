@@ -1,1 +1,3 @@
 Đôi khi có xung đột về peer dependencies thay vì npm install => npm install --legacy-peer-deps
+
+Để sử dụng scss thì phải => npm i sass or yarn add sass
