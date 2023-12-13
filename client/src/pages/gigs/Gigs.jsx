@@ -15,10 +15,11 @@ const Gigs = () => {
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">VFIVERR > GRAPHICS & DESIGN ></span>
+        <span className="breadcrumbs">VFIVERR &gt; GRAPHICS &amp; DESIGN &gt;</span>
+
         <h1>AI Artists</h1>
         <p>
-          Explore the boundaries of art and technology with Liverr's AI artists
+          Explore the boundaries of art and technology with Vfiverr's AI artists
         </p>
 
         <div className="menu">
