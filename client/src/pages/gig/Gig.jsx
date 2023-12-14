@@ -13,7 +13,7 @@ const Gig = () => {
           <h1>I will create ai generated art for you</h1>
 
           <div className="user">
-            <img src="/img/person.png" alt="" />
+            <img className="pp" src="/img/person.png" alt="" />
             <span>Thuy Vy</span>
             <div className="stars">
               <img src="/img/star.png" alt="" />
@@ -41,9 +41,7 @@ const Gig = () => {
           </Slider>
 
           <h2>About This Gig</h2>
-          <p>
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafffffffffffffffffffaaaaaaaaaaaaaaffffffffffffsssssssssssssssssssssawdfsdasdasdawdafagfshfgjghkuyhiutjygtdfgrdedadfeddfrtgfhfsafdardgfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaddddddddddddddddaaaddddddddddddddddddaaaaaaaaaaaaaaaaaaaaa
-          </p>
+          <p>TTV | ThuyVy. I don't know how to write anything here. I need an English degree so I'm studying English to prepare for the TOEIC exam. I hope I will have good luck. Besides, I hope I will find a stable job in my major. Let's go</p>
 
           <div className="seller">
             <h2>About The Seller</h2>
@@ -100,7 +98,7 @@ const Gig = () => {
             <h2>Reviews</h2>
             <div className="item">
               <div className="user">
-                <img src="/img/person.png" alt="" />
+                <img className="pp" src="/img/person.png" alt="" />
                 <div className="info">
                   <span>Thuy Vy</span>
                   <div className="country">
@@ -131,10 +129,12 @@ const Gig = () => {
                 <span>No</span>
               </div>
             </div>
+
             <hr />
+
             <div className="item">
               <div className="user">
-                <img src="/img/person.png" alt="" />
+                <img className="pp" src="/img/person.png" alt="" />
                 <div className="info">
                   <span>Thuy Vy</span>
                   <div className="country">
@@ -165,10 +165,12 @@ const Gig = () => {
                 <span>No</span>
               </div>
             </div>
+
             <hr />
+
             <div className="item">
               <div className="user">
-                <img src="/img/person.png" alt="" />
+                <img className="pp" src="/img/person.png" alt="" />
                 <div className="info">
                   <span>Thuy Vy</span>
                   <div className="country">
@@ -203,7 +205,49 @@ const Gig = () => {
           </div>
         </div>
 
-        <div className="right"></div>
+        <div className="right">
+          <div className="price">
+            <h3>1 AI generated image</h3>
+            <h2>$ 68.68</h2>
+          </div>
+
+          <p>I will create a unique high quality AI generated image based on a description that you give me</p>
+
+          <div className="details">
+            <div className="item">
+              <img src="/img/clock.png" alt="" />
+              <span>2 days Delivery</span>
+            </div>
+
+            <div className="item">
+              <img src="/img/recycle.png" alt="" />
+              <span>3 Revisions</span>
+            </div>
+          </div>
+
+          <div className="features">
+            <div className="item">
+              <img src="/img/greencheck.png" alt="" />
+              <span>Prompt writing</span>
+            </div>
+
+            <div className="item">
+              <img src="/img/greencheck.png" alt="" />
+              <span>Art</span>
+            </div>
+
+            <div className="item">
+              <img src="/img/greencheck.png" alt="" />
+              <span>Image</span>
+            </div>
+
+            <div className="item">
+              <img src="/img/greencheck.png" alt="" />
+              <span>Addtional design</span>
+            </div>
+          </div>
+          <button>Continue</button>
+        </div>
       </div>
     </div>
   );
