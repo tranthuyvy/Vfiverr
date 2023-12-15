@@ -4,3 +4,6 @@
 
 Để check lỗi nhanh chóng => npm i eslint --dev or yarn add eslint --dev
 Khởi tạo: npx eslint --init
+
+
+Avatar: https://i.imgur.com/hAQm6j8.jpg
