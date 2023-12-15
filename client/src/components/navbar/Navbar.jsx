@@ -6,24 +6,24 @@ import newRequest from "../../../utils/newRequest";
 const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const isActive = () => {
-    window.scrollY > 0 ? setActive(true) : setActive(false)
-  }
+    window.scrollY > 0 ? setActive(true) : setActive(false);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", isActive);
 
     return () => {
-      window.removeEventListener("scroll", isActive)
+      window.removeEventListener("scroll", isActive);
     };
-  }, [])
+  }, []);
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     try {
       await newRequest.post("/auth/logout");
       localStorage.setItem("currentUser", null);
@@ -31,7 +31,7 @@ const Navbar = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
@@ -49,25 +49,46 @@ const Navbar = () => {
           <span>English</span>
           <span>Sign in</span>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
-          {!currentUser && <button>Join</button>}
-          {currentUser && (
+
+          {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img src={currentUser.img || "/img/noavatar.jpg"} alt="avatar"/>
+              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
               <span>{currentUser?.username}</span>
-              {open && <div className="options">
-                {
-                  currentUser?.isSeller && (
+              {open && (
+                <div className="options">
+                  {currentUser.isSeller && (
                     <>
-                    <Link className="link" to="/mygigs">Gigs</Link>
-                    <Link className="link" to="/add">Add New Gig</Link>
+                      <Link className="link" to="/mygigs">
+                        Gigs
+                      </Link>
+                      <Link className="link" to="/add">
+                        Add New Gig
+                      </Link>
                     </>
                   )}
-                  <Link className="link" to="/orders">Orders</Link>
-                  <Link className="link" to="/messages">Messages</Link>
-                  <Link className="link" onClick={handleLogout}>Logout</Link>
-              </div>}
+                  <Link className="link" to="/orders">
+                    Orders
+                  </Link>
+                  <Link className="link" to="/messages">
+                    Messages
+                  </Link>
+                  <Link className="link" onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </div>
+              )}
             </div>
+          ) : (
+            <>
+              <Link to="/login" className="link">
+                Sign in
+              </Link>
+              <Link className="link" to="/register">
+                <button>Join</button>
+              </Link>
+            </>
           )}
+          
         </div>
       </div>
       {(active || pathname !== "/") && (
