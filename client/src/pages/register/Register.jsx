@@ -1,6 +1,8 @@
-import {useNavigate} from "react-router-dom";
-import "./Register.scss"
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "./Register.scss";
+import newRequest from "../../../utils/newRequest";
+import upload from "../../../utils/upload";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,7 +19,8 @@ const Register = () => {
 
   const handleChange = (e) => {
     setUser((prev) => {
-      return {...prev, 
+      return {
+        ...prev, 
         [e.target.name] :e.target.value
       }
     })
@@ -25,13 +28,26 @@ const Register = () => {
 
   const handleSeller = (e) => {
     setUser((prev) => { 
-      return {...prev, isSeller : e.target.checked};
+      return {
+        ...prev, 
+        isSeller : e.target.checked
+      };
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const url = await upload(file)
+    try {
+      await newRequest.post("/auth/register", {
+        ...user,
+        img : url,
+      });
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -85,6 +101,7 @@ const Register = () => {
 
           <h1>Become Seller</h1>
           <div className="toggle">
+
             <label htmlFor="">Activate the seller account</label>
             <label className="switch">
               <input type="checkbox" onChange={handleSeller} />
