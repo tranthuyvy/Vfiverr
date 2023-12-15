@@ -17,6 +17,7 @@ export const createGig = async (req, res, next) => {
     next(error);
   }
 };
+
 export const deleteGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
@@ -31,5 +32,15 @@ export const deleteGig = async (req, res, next) => {
     next(error);
   }
 };
-export const getGig = async (req, res, next) => {};
+
+export const getGig = async (req, res, next) => {
+  try {
+    const gig = await Gig.findById(req.params.id);
+    if (!gig) return next(createError(404, "Gig not found"));
+    res.status(200).send(gig);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getGigs = async (req, res, next) => {};
