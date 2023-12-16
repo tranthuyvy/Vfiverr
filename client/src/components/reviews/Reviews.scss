@@ -14,21 +14,26 @@
 
       input {
         padding: 20px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
       }
 
       select {
-        width: 200px;
+        width: 90px;
         padding: 20px;
         align-self: flex-end;
+        border-radius: 5px;
+        border: 1px solid lightgray;
       }
       button {
         align-self: flex-end;
-        width: 100px;
+        width: 90px;
         border: none;
         padding: 10px;
         color: white;
         background-color: #1dbf73;
         cursor: pointer;
+        border-radius: 5px;
       }
     }
   }

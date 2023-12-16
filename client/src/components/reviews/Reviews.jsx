@@ -5,6 +5,7 @@ import "./Reviews.scss";
 
 
 const Reviews = ({ gigId }) => {
+  
   const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
     queryKey: ["reviews"],
@@ -39,9 +40,9 @@ const Reviews = ({ gigId }) => {
         ? "Something went wrong!"
         : data.map((review) => <Review key={review._id} review={review} />)}
       <div className="add">
-        <h3>Add a review</h3>
+        <h3>Add Review</h3>
         <form action="" className="addForm" onSubmit={handleSubmit}>
-          <input type="text" placeholder="write your opinion" />
+          <input type="text" placeholder="Review" />
           <select name="" id="">
             <option value={1}>1</option>
             <option value={2}>2</option>
