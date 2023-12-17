@@ -1,5 +1,6 @@
 import createError from "../utils/createError.js";
 import Message from "../models/message.model.js";
+import Conversation from "../models/conversation.model.js";
 
 export const createMessage = async (req, res, next) => {
   const newMessage = new Message({
@@ -21,19 +22,16 @@ export const createMessage = async (req, res, next) => {
       { new: true }
     );
 
-    res.status(200).send(savedMessage);
-  } catch (error) {
-    next(error);
+    res.status(201).send(savedMessage);
+  } catch (err) {
+    next(err);
   }
 };
-
-export const getMessage = async (req, res, next) => {
+export const getMessages = async (req, res, next) => {
   try {
-    const messages = await Message.find({
-      conversationId: req.params.id,
-    });
+    const messages = await Message.find({ conversationId: req.params.id });
     res.status(200).send(messages);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };

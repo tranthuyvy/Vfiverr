@@ -12,7 +12,7 @@ export const createConversation = async (req, res, next) => {
 
   try {
     const savedConversation = await newConversation.save();
-    res.status(200).send(savedConversation);
+    res.status(201).send(savedConversation);
   } catch (err) {
     next(err);
   }
