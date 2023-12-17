@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./Navbar.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import newRequest from "../../../utils/newRequest";
+import newRequest from "../../utils/newRequest";
+import "./Navbar.scss";
 
-const Navbar = () => {
+function Navbar() {
+  const navigate = useNavigate();
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
@@ -15,21 +17,18 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", isActive);
-
     return () => {
       window.removeEventListener("scroll", isActive);
     };
   }, []);
-
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const handleLogout = async () => {
     try {
       await newRequest.post("/auth/logout");
       localStorage.setItem("currentUser", null);
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -37,19 +36,16 @@ const Navbar = () => {
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
-          <Link to="/" className="link">
+          <Link className="link" to="/">
             <span className="text">Vfiverr</span>
           </Link>
           <span className="dot">.</span>
         </div>
-
         <div className="links">
           <span>Fiverr Business</span>
           <span>Explore</span>
           <span>English</span>
-          <span>Sign in</span>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
-
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
               <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
@@ -80,15 +76,12 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="link">
-                Sign in
-              </Link>
+              <Link to="/login" className="link">Sign in</Link>
               <Link className="link" to="/register">
                 <button>Join</button>
               </Link>
             </>
           )}
-          
         </div>
       </div>
       {(active || pathname !== "/") && (
@@ -128,6 +121,6 @@ const Navbar = () => {
       )}
     </div>
   );
-};
+}
 
 export default Navbar;

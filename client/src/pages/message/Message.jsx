@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import newRequest from "../../../utils/newRequest";
+import newRequest from "../../utils/newRequest";
 import "./Message.scss";
 
 const Message = () => {
@@ -40,7 +40,7 @@ const Message = () => {
     <div className="message">
       <div className="container">
         <span className="breadcrumbs">
-          <Link to="/messages">Messages</Link> {">"}
+          <Link to="/messages">Messages</Link> > John Doe >
         </span>
         {isLoading ? (
           "loading"
@@ -61,7 +61,7 @@ const Message = () => {
         )}
         <hr />
         <form className="write" onSubmit={handleSubmit}>
-          <textarea type="text" placeholder="Message" />
+          <textarea type="text" placeholder="write a message" />
           <button type="submit">Send</button>
         </form>
       </div>

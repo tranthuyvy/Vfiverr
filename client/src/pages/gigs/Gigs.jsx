@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import newRequest from "../../../utils/newRequest.js";
-import GigCard from "../../components/gigCard/GigCard.jsx";
+import React, { useEffect, useRef, useState } from "react";
 import "./Gigs.scss";
+import GigCard from "../../components/gigCard/GigCard";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../utils/newRequest";
+import { useLocation } from "react-router-dom";
 
 function Gigs() {
   const [sort, setSort] = useState("sales");
@@ -60,7 +60,7 @@ function Gigs() {
             <span className="sortType">
               {sort === "sales" ? "Best Selling" : "Newest"}
             </span>
-            <img src="/img/down.png" alt="" onClick={() => setOpen(!open)} />
+            <img src="./img/down.png" alt="" onClick={() => setOpen(!open)} />
             {open && (
               <div className="rightMenu">
                 {sort === "sales" ? (

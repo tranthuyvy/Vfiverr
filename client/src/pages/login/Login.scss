@@ -11,7 +11,7 @@
     gap: 20px;
 
     h1 {
-      color: gray;
+      color: #1dbf73;
       margin-bottom: 20px;
     }
 
@@ -24,6 +24,7 @@
     textarea {
       padding: 20px;
       border: 1px solid rgb(216, 214, 214);
+      border-radius: 5px;
     }
 
     button {
@@ -34,6 +35,8 @@
       font-size: 18px;
       background-color: #1dbf73;
       cursor: pointer;
+      border-radius: 5px;
+      margin-top: 5px;
     }
 
     span {

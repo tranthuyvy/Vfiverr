@@ -1,25 +1,23 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Login.scss";
-import newRequest from "../../../utils/newRequest";
+import newRequest from "../../utils/newRequest";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await newRequest.post("/auth/login", {
-        username,
-        password,
-      });
+      const res = await newRequest.post("/auth/login", { username, password });
       localStorage.setItem("currentUser", JSON.stringify(res.data));
-      navigate("/");
-    } catch (error) {
-      setError(error.response.data);
+      navigate("/")
+    } catch (err) {
+      setError(err.response.data);
     }
   };
 
@@ -47,6 +45,6 @@ const Login = () => {
       </form>
     </div>
   );
-};
+}
 
 export default Login;

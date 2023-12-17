@@ -1,11 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
+import upload from "../../utils/upload";
 import "./Register.scss";
-import newRequest from "../../../utils/newRequest";
-import upload from "../../../utils/upload";
+import newRequest from "../../utils/newRequest";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
-  const navigate = useNavigate();
+function Register() {
   const [file, setFile] = useState(null);
   const [user, setUser] = useState({
     username: "",
@@ -17,44 +16,37 @@ const Register = () => {
     desc: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setUser((prev) => {
-      return {
-        ...prev, 
-        [e.target.name] :e.target.value
-      }
-    })
-  }
-
-  const handleSeller = (e) => {
-    setUser((prev) => { 
-      return {
-        ...prev, 
-        isSeller : e.target.checked
-      };
+      return { ...prev, [e.target.name]: e.target.value };
     });
   };
 
+  const handleSeller = (e) => {
+    setUser((prev) => {
+      return { ...prev, isSeller: e.target.checked };
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = await upload(file)
+    const url = await upload(file);
     try {
       await newRequest.post("/auth/register", {
         ...user,
-        img : url,
+        img: url,
       });
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
+      navigate("/")
+    } catch (err) {
+      console.log(err);
     }
-  }
-
+  };
   return (
     <div className="register">
       <form onSubmit={handleSubmit}>
         <div className="left">
-
           <h1>Create Account</h1>
           <label htmlFor="">Username</label>
           <input
@@ -63,7 +55,6 @@ const Register = () => {
             placeholder="Username"
             onChange={handleChange}
           />
-
           <label htmlFor="">Email</label>
           <input
             name="email"
@@ -71,38 +62,29 @@ const Register = () => {
             placeholder="Email"
             onChange={handleChange}
           />
-
           <label htmlFor="">Password</label>
           <input 
             name="password" 
-            type="password"
+            type="password" 
+            onChange={handleChange}
             placeholder="Password"
-            onChange={handleChange} 
           />
-
-          <label htmlFor="">Avatar</label>
-          <input 
-            type="file" 
-            onChange={(e) => setFile(e.target.files[0])} 
-          />
-
+          <label htmlFor="">Profile Picture</label>
+          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
           <label htmlFor="">Country</label>
           <input
             name="country"
             type="text"
-            placeholder="Country"
+            placeholder="Vietnamese"
             onChange={handleChange}
           />
-
           <button type="submit">Register</button>
-
         </div>
-        <div className="right">
 
+        <div className="right">
           <h1>Become Seller</h1>
           <div className="toggle">
-
-            <label htmlFor="">Activate the seller account</label>
+            <label htmlFor="">Active Seller Account</label>
             <label className="switch">
               <input type="checkbox" onChange={handleSeller} />
               <span className="slider round"></span>
@@ -113,7 +95,7 @@ const Register = () => {
           <input
             name="phone"
             type="text"
-            placeholder="+84"
+            placeholder="Your phone number"
             onChange={handleChange}
           />
 
@@ -130,7 +112,7 @@ const Register = () => {
         </div>
       </form>
     </div>
-  )
+  );
 }
 
-export default Register
+export default Register;

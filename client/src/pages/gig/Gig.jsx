@@ -3,9 +3,8 @@ import "./Gig.scss";
 import { Slider } from "infinite-react-carousel/lib";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import newRequest from "../../../utils/newRequest";
+import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
-
 
 function Gig() {
   const { id } = useParams();
@@ -70,13 +69,11 @@ function Gig() {
                 )}
               </div>
             )}
-            
             <Slider slidesToShow={1} arrowsScroll={1} className="slider">
               {data.images.map((img) => (
                 <img key={img} src={img} alt="" />
               ))}
             </Slider>
-
             <h2>About This Gig</h2>
             <p>{data.desc}</p>
             {isLoadingUser ? (
@@ -84,7 +81,6 @@ function Gig() {
             ) : errorUser ? (
               "Something went wrong!"
             ) : (
-
               <div className="seller">
                 <h2>About The Seller</h2>
                 <div className="user">
@@ -133,13 +129,9 @@ function Gig() {
                   <p>{dataUser.desc}</p>
                 </div>
               </div>
-
             )}
-
             <Reviews gigId={id} />
-
           </div>
-
           <div className="right">
             <div className="price">
               <h3>{data.shortTitle}</h3>

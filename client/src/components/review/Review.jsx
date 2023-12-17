@@ -1,15 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import newRequest from "../../../utils/newRequest";
+import React from "react";
+import newRequest from "../../utils/newRequest";
 import "./Review.scss";
-
 const Review = ({ review }) => {
-  const { isLoading, error, data } = useQuery({
-    queryKey: [review.userId],
-    queryFn: () =>
-      newRequest.get(`/users/${review.userId}`).then((res) => {
-        return res.data;
-      }),
-  });
+  const { isLoading, error, data } = useQuery(
+    {
+      queryKey: [review.userId],
+      queryFn: () =>
+        newRequest.get(`/users/${review.userId}`).then((res) => {
+          return res.data;
+        }),
+    },
+  );
 
   return (
     <div className="review">
