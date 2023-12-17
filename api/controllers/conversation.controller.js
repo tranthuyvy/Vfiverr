@@ -31,20 +31,20 @@ export const updateConversation = async (req, res, next) => {
       },
       { new: true }
     );
+
     res.status(200).send(updatedConversation);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 
 export const getSingleConversation = async (req, res, next) => {
   try {
-    const conversation = await Conversation.findOne({
-      id: req.params.id,
-    });
+    const conversation = await Conversation.findOne({ id: req.params.id });
+    if (!conversation) return next(createError(404, "Not found!"));
     res.status(200).send(conversation);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -52,9 +52,9 @@ export const getConversations = async (req, res, next) => {
   try {
     const conversations = await Conversation.find(
       req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
-    );
+    ).sort({ updatedAt: -1 });
     res.status(200).send(conversations);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
