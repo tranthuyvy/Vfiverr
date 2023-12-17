@@ -1,134 +1,57 @@
-import React from 'react'
-import "./Orders.scss"
+import { useQuery } from "@tanstack/react-query";
+import "./Orders.scss";
+
+import newRequest from "../../../utils/newRequest";
 
 const Orders = () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-  const currentUser = {
-    id : 1,
-    username:"Vy",
-    isSeller: true
-  };
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["orders"],
+    queryFn: () =>
+      newRequest.get(`/orders`).then((res) => {
+        return res.data;
+      }),
+  });
 
   return (
-    <div className='orders'>
-      <div className="container">
+    <div className="orders">
+      {isLoading ? (
+        "loading"
+      ) : error ? (
+        "error"
+      ) : (
+        <div className="container">
+          <div className="title">
+            <h1>Orders</h1>
+          </div>
 
-        <div className="title">
-          <h1>Orders</h1>
+          <table>
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Contact</th>
+            </tr>
+
+            {data.map((order) => (
+              <tr key={order._id}>
+                <td>
+                  <img className="image" src={order.img} alt="" />
+                </td>
+                <td>{order.title}</td>
+                <td>{order.price}</td>
+                <td>
+                  <img className="message" src="/img/message.png" alt="" />
+                </td>
+              </tr>
+            ))}
+
+          </table>
         </div>
-
-        <table>
-          <tr>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>{currentUser?.isSeller ? "Buyer" : "Seller"}</th>
-            <th>Contact</th>
-          </tr>
-
-          <tr>
-            <td>
-              <img 
-                className='image'
-                src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" 
-                alt="" 
-              />
-            </td>
-            <td>Gig1</td>
-            <td>68.68</td>
-            <td>68</td>
-            <td>
-              <img 
-                className="message" 
-                src="/img/message.png" 
-                alt="" 
-              />
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <img 
-                className='image'
-                src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" 
-                alt="" 
-              />
-            </td>
-            <td>Gig1</td>
-            <td>68.68</td>
-            <td>68</td>
-            <td>
-              <img 
-                className="message" 
-                src="/img/message.png" 
-                alt="" 
-              />
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <img 
-                className='image'
-                src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" 
-                alt="" 
-              />
-            </td>
-            <td>Gig1</td>
-            <td>68.68</td>
-            <td>68</td>
-            <td>
-              <img 
-                className="message" 
-                src="/img/message.png" 
-                alt="" 
-              />
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <img 
-                className='image'
-                src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" 
-                alt="" 
-              />
-            </td>
-            <td>Gig1</td>
-            <td>68.68</td>
-            <td>68</td>
-            <td>
-              <img 
-                className="message" 
-                src="/img/message.png" 
-                alt="" 
-              />
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <img 
-                className='image'
-                src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" 
-                alt="" 
-              />
-            </td>
-            <td>Gig1</td>
-            <td>68.68</td>
-            <td>68</td>
-            <td>
-              <img 
-                className="message" 
-                src="/img/message.png" 
-                alt="" 
-              />
-            </td>
-          </tr>
-        </table>
-      </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Orders
+export default Orders;
